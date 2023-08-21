@@ -57,7 +57,31 @@ class ListaDoblementeEnlazada():
         nuevoNodo.nodoSiguiente = nodoRecorrido
 
 
-insertar(item, posicion): #Agrega un nuevo ítem a la lista en "posicion". Si la posición no se pasa como argumento, el ítem debe añadirse al final de la lista. "posicion" es un entero que indica la posición en la lista donde se va a insertar el nuevo elemento.
+    #La siguiente función agrega un nuevo ítem a la lista en "posicion"."posicion" es un entero que indica la posición en la lista donde se va a insertar el nuevo elemento. Si la posición no se pasa como argumento, el ítem debe añadirse al final de la lista.
+    def insertar(self, item, posicion=None):
+        nuevoNodo = Nodo(item) #Creamos un nuevo objeto de tipo Nodo con el elemento proporcionado y lo almacenamos en la variable nuevoNodo.
+
+        if posicion is None or posicion >= self.largo: #Aquí verificamos si no se proporciona una posición o si la posición proporcionada está fuera del rango actual de la lista.
+            self.agregar_al_final(item)  # Agregar al final si no se especifica la posición o si está fuera de rango
+            return
+
+        nodoRecorrido = self.cabeza #Inicializamos el nodo de recorrido con el "nodo cabeza"
+        posicion_actual = 0 #Inicializamos una variable para realizar un seguimiento de la posición actual mientras recorremos la lista.
+
+        while posicion_actual < posicion: #Usamos un bucle while para avanzar en la lista hasta que alcancemos la posición deseada.
+            nodoRecorrido = nodoRecorrido.obtenerSiguiente() #Actualizamos el nodo de recorrido al siguiente nodo en la lista.
+            posicion_actual += 1
+
+        nodoAnterior = nodoRecorrido.obtenerAnterior() #Obtenemos el nodo anterior al nodo de recorrido.
+
+        nuevoNodo.asignarAnterior(nodoAnterior) #Asignamos el nodo anterior al nuevo nodo.
+        nuevoNodo.asignarSiguiente(nodoRecorrido) #Asignamos el nodo siguiente al nuevo nodo.
+        nodoAnterior.asignarSiguiente(nuevoNodo) #Actualizamos el enlace del nodo anterior para que apunte al nuevo nodo.
+        nodoRecorrido.asignarAnterior(nuevoNodo) #Actualizamos el enlace del nodo de recorrido para que apunte al nuevo nodo.
+        self.largo += 1
+
+
+
 
 extraer(posicion): #elimina y devuelve el ítem en "posición". Si no se indica el parámetro posición, se elimina y devuelve el último elemento de la lista.
 
