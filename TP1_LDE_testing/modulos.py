@@ -106,24 +106,16 @@ class ListaDoblementeEnlazada():
         
         return nodoAExtraer.dato
 
-        nodoRecorrido = self.cabeza #Inicializamos el nodo de recorrido con el "nodo cabeza"
-        posicion_actual = 0 #Inicializamos una variable para realizar un seguimiento de la posición actual mientras recorremos la lista.
 
-        while posicion_actual < posicion: #Usamos un bucle while para avanzar en la lista hasta que alcancemos la posición deseada.
-            nodoRecorrido = nodoRecorrido.obtenerSiguiente() #Actualizamos el nodo de recorrido al siguiente nodo en la lista.
-            posicion_actual += 1
-
-        nodoAnterior = nodoRecorrido.obtenerAnterior() #Obtenemos el nodo anterior al nodo de recorrido.
-
-        nuevoNodo.asignarAnterior(nodoAnterior) #Asignamos el nodo anterior al nuevo nodo.
-        nuevoNodo.asignarSiguiente(nodoRecorrido) #Asignamos el nodo siguiente al nuevo nodo.
-        nodoAnterior.asignarSiguiente(nuevoNodo) #Actualizamos el enlace del nodo anterior para que apunte al nuevo nodo.
-        nodoRecorrido.asignarAnterior(nuevoNodo) #Actualizamos el enlace del nodo de recorrido para que apunte al nuevo nodo.
-        self.largo += 1
-
-
-copiar(): #Realiza una copia de la lista elemento a elemento y devuelve la copia.
-
+    def copiar(self): #Realiza una copia de la lista elemento a elemento y devuelve la copia
+        nodoRecorrido = self.cabeza
+        listaCopia = ListaDoblementeEnlazada()
+        while nodoRecorrido != None:
+            nuevoNodo = Nodo(nodoRecorrido.dato)
+            listaCopia.agregar_al_final(nuevoNodo.dato)
+            nodoRecorrido=nodoRecorrido.obtenerSiguiente()
+        return listaCopia
+    
 invertir(): #Invierte el orden de los elementos de la lista.
 
 ordenar(): #Ordena los elementos de la lista de "menor a mayor".
