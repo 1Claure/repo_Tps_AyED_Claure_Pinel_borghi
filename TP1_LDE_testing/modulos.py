@@ -27,6 +27,7 @@ class ListaDoblementeEnlazada():
     def __init__(self):
         self.cabeza = None
         self.largo = 0
+        self.cola = None
 
     def esta_vacia(self): #Devuelve True si la lista está vacía.
         return self.cabeza == None
@@ -44,6 +45,7 @@ class ListaDoblementeEnlazada():
 
         nodoRecorrido.nodoSiguiente=nuevoNodo
         nuevoNodo.nodoAnterior=nodoRecorrido
+        self.cola=nuevoNodo
 
     def agregar_al_inicio(self,item): #Agrega un nuevo ítem al inicio de la lista.
         nodoRecorrido = self.cabeza  # Para recorrer los datos
@@ -80,10 +82,45 @@ class ListaDoblementeEnlazada():
         nodoRecorrido.asignarAnterior(nuevoNodo) #Actualizamos el enlace del nodo de recorrido para que apunte al nuevo nodo.
         self.largo += 1
 
+    def extraer(self,item,posicion): #elimina y devuelve el ítem en "posición". Si no se indica el parámetro posición, se elimina y devuelve el último elemento de la lista.
+        nodoRecorrido=self.cabeza
+        
+        if posicion is None:
+            posicion=self.largo-1
+        
+        posicionActual=0
 
+        while(posicion > posicionActual):
+            nodoRecorrido=nodoRecorrido.obtenerSiguiente()
+            posicionActual+=1
 
+        dato_anterior=nodoRecorrido.nodoAnterior
+        dato_anterior.nodoSiguiente = nodoRecorrido.nodoSiguiente
 
-extraer(posicion): #elimina y devuelve el ítem en "posición". Si no se indica el parámetro posición, se elimina y devuelve el último elemento de la lista.
+        dato_siguiente=nodoRecorrido.nodoSiguiente
+        dato_siguiente.nodoAnterior = nodoRecorrido.nodoAnterior
+
+        nodoAExtraer = nodoRecorrido
+        nodoAExtraer.nodoSiguiente = None
+        nodoAExtraer.nodoAnterior = None
+        
+        return nodoAExtraer.dato
+
+        nodoRecorrido = self.cabeza #Inicializamos el nodo de recorrido con el "nodo cabeza"
+        posicion_actual = 0 #Inicializamos una variable para realizar un seguimiento de la posición actual mientras recorremos la lista.
+
+        while posicion_actual < posicion: #Usamos un bucle while para avanzar en la lista hasta que alcancemos la posición deseada.
+            nodoRecorrido = nodoRecorrido.obtenerSiguiente() #Actualizamos el nodo de recorrido al siguiente nodo en la lista.
+            posicion_actual += 1
+
+        nodoAnterior = nodoRecorrido.obtenerAnterior() #Obtenemos el nodo anterior al nodo de recorrido.
+
+        nuevoNodo.asignarAnterior(nodoAnterior) #Asignamos el nodo anterior al nuevo nodo.
+        nuevoNodo.asignarSiguiente(nodoRecorrido) #Asignamos el nodo siguiente al nuevo nodo.
+        nodoAnterior.asignarSiguiente(nuevoNodo) #Actualizamos el enlace del nodo anterior para que apunte al nuevo nodo.
+        nodoRecorrido.asignarAnterior(nuevoNodo) #Actualizamos el enlace del nodo de recorrido para que apunte al nuevo nodo.
+        self.largo += 1
+
 
 copiar(): #Realiza una copia de la lista elemento a elemento y devuelve la copia.
 
