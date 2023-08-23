@@ -116,9 +116,23 @@ class ListaDoblementeEnlazada():
             nodoRecorrido=nodoRecorrido.obtenerSiguiente()
         return listaCopia
     
-    def invertir(): #Invierte el orden de los elementos de la lista.
+    def invertir(self): #Invierte el orden de los elementos de la lista.
         nodoRecorrido = self.cabeza
-        listaCopia = ListaDoblementeEnlazada()
+        posicionInicial=0
+        while(posicionInicial<largo):
+            nodoAuxiliar = nodoRecorrido.nodoAnterior
+            nodoRecorrido.nodoAnterior=nodoRecorrido.nodoSiguiente
+            nodoRecorrido.nodoSiguiente=nodoAuxiliar
+
+            posicionInicial+=1
+            nodoRecorrido=nodoRecorrido.nodoAnterior
+        
+
+
+
+
+        
+
 
 ordenar(): #Ordena los elementos de la lista de "menor a mayor".
 
