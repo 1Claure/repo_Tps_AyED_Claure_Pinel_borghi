@@ -118,22 +118,39 @@ class ListaDoblementeEnlazada():
     
     def invertir(self): #Invierte el orden de los elementos de la lista.
         nodoRecorrido = self.cabeza
-        posicionInicial=0
-        while(posicionInicial<largo):
+        posicionInicial = 0
+        while(posicionInicial<self.largo):
             nodoAuxiliar = nodoRecorrido.nodoAnterior
             nodoRecorrido.nodoAnterior=nodoRecorrido.nodoSiguiente
             nodoRecorrido.nodoSiguiente=nodoAuxiliar
 
             posicionInicial+=1
             nodoRecorrido=nodoRecorrido.nodoAnterior
+    
+    def ordenar(self): #Ordena los elementos de la lista de "menor a mayor".
+
+        for _ in range(1,self.largo-1):
+            nodoRecorrido = self.cabeza
+            nodoPosterior = nodoRecorrido.obtenerSiguiente
+
+            while nodoRecorrido is not None and nodoPosterior.obtenerDato<nodoRecorrido.obtenerDato:
+                nodoActual=nodoRecorrido
+                nodoRecorrido.asignarDato=nodoPosterior.obtenerDato
+
+                nodoRecorrido.obtenerSiguiente=nodoActual
+    
+    def concatenar(self,Lista): #Recibe una lista como argumento y retorna la lista actual con la lista pasada como parámetro concatenada al final de la primera. Esta operación también debe ser posible utilizando el operador de suma ‘+’. Aclaración: No se deben modificar las listas.
+        nuevaListaConcatenada = ListaDoblementeEnlazada()
+        nuevaListaConcatenada = self
         
+        while self is not None:
 
+            nuevaListaConcatenada.agregar_al_final(Lista.obtenerDato())
+            Lista=Lista.obtenerSiguiente()
 
-
-
-        
-
-
-ordenar(): #Ordena los elementos de la lista de "menor a mayor".
-
-concatenar(Lista): #Recibe una lista como argumento y retorna la lista actual con la lista pasada como parámetro concatenada al final de la primera. Esta operación también debe ser posible utilizando el operador de suma ‘+’. Aclaración: No se deben modificar las listas.
+        return nuevaListaConcatenada
+    
+    def __add__ (self,Lista)
+        return self.concatenar(Lista)
+    
+    #revisar todas con profes
