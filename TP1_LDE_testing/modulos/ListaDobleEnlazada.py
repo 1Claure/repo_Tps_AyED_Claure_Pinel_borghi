@@ -115,11 +115,38 @@ class ListaDoblementeEnlazada():
         self.tamanio += 1
 
     def extraer(self,posicion=None): #elimina y devuelve el ítem en "posición". Si no se indica el parámetro posición, se elimina y devuelve el último elemento de la lista.
-        if posicion is None or posicion >= self.tamanio: #Aquí verificamos si no se proporciona una posición o si la posición proporcionada está fuera del rango actual de la lista.
+        nodoRecorrido = self.cabeza #Inicializamos el nodo de recorrido con el "nodo cabeza"
+        
+        if posicion is None or posicion >= self.tamanio or posicion == -1: #Aquí verificamos si no se proporciona una posición o si la posición proporcionada está fuera del rango actual de la lista.
             posicion = self.tamanio - 1 #Si la posición está fuera de rango, establecemos la posición en el último elemento de la lista.
 
         if posicion is 0:
-            return self.extraer_primero()
+            na=nodoRecorrido
+            self.cabeza=nodoRecorrido.obtenerSiguiente()
+            self.cabeza.anterior=None
+            self.tamanio -= 1
+            return na.dato
+        
+        posicion_actual = 0
+        while posicion_actual < posicion: #Usamos un bucle while para avanzar en la lista hasta que alcancemos la posición deseada.
+            nodoRecorrido = nodoRecorrido.obtenerSiguiente() #Actualizamos el nodo de recorrido al siguiente nodo en la lista.
+            posicion_actual += 1
+            
+        if nodoRecorrido.anterior != None:
+            nodoRecorrido.anterior.siguiente = nodoRecorrido.siguiente
+            
+        #else:
+            #self.cabeza = nodoRecorrido.siguiente
+
+        if nodoRecorrido.siguiente != None:
+            nodoRecorrido.siguiente.anterior = nodoRecorrido.anterior
+            
+        else:
+            self.cola = nodoRecorrido.anterior
+            
+        self.tamanio -= 1
+
+        return nodoRecorrido.dato
         
 
 

@@ -372,11 +372,12 @@ class Test_LDE(unittest.TestCase):
         de la clase lista doblemente enlazada. Verifica que los nodos de la lista
         esten bien enlazados entre sí (forward y backward).
         """
+
         # Recorro de adelante para atras
         nodo = lista.cabeza
         counter = 0
         elementos = []
-        print(nodo)
+
         self.assertIsNone(nodo.anterior,
                           "El elemento anterior a la cabeza de la lista debe ser None")
 
