@@ -6,8 +6,8 @@ Created on Sun Aug 21 11:23:53 2022
 """
 
 
-from modulos.juego_guerra import Mazo
-from modulos.juego_guerra import Carta
+from juego_guerra import Mazo
+from Carta import Carta
 import unittest
 
 
