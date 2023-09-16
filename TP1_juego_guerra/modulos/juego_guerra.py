@@ -1,13 +1,15 @@
 from Mazo import Mazo
 import random
 
-class Juego:
+class Interfaz:
     def __init__(self, seed):
-        self.mazo = Mazo()
-        self.jugador1 = []
-        self.jugador2 = []
+        
+        self.jugador1 = Mazo()
+        self.jugador2 = Mazo()
+        self.cartas_en_mesa = Mazo()
         self.turno = 1
-        self.max_turnos = 10
+        self.cartas_boca_abajo = 3
+        self.max_turnos = 400
         self.puntaje_carta = {
             "2": 2,
             "3": 3,
@@ -24,58 +26,87 @@ class Juego:
             "A": 14
         }
         random.seed(seed)  #Uso una semilla de generación aleatoria para probar distintos escenarios
+    
+    def __iter__(self):
+        return iter(self.cartas_en_mesa)
 
     def iniciar_juego(self):
-        self.mazo.mezclar()
-        for _ in range(26):
-            self.jugador1.append(self.mazo.sacar_arriba())
-            self.jugador2.append(self.mazo.sacar_arriba())
+        self.cartas_en_mesa.crear_mazo()
+        self.cartas_en_mesa.mezclar()
+        for _ in range(len(self.cartas_en_mesa) // 2):
+            self.jugador1.poner_abajo(self.cartas_en_mesa.sacar_arriba())
+            self.jugador2.poner_abajo(self.cartas_en_mesa.sacar_arriba())
+        self.cartas_en_mesa = Mazo()
+
+    def mostrar_turno(self):
+        print(f"--------------------\nTurno {self.turno}")
+        print("Jugador 1:")
+        print(self.jugador1)
+        print("\n")
+        print(self.cartas_en_mesa)
+        print("\n")
+        print("Jugador 2:")
+        print(self.jugador2)
 
     def jugar_turno(self):
-        if self.turno > self.max_turnos:
-            print("La partida ha alcanzado el máximo de turnos.")
-            print("¡Empate!")
-            return
+        self.turno += 1
 
-        print(f"--------------\nTurno {self.turno}")
-        print("Jugador 1:")
-        print("-" + " -".join(str(carta) for carta in self.jugador1))
-        print("Jugador 2:")
-        print("-" + " -".join(str(carta) for carta in self.jugador2))
-
-        carta_jugador1 = self.jugador1.pop(0)
-        carta_jugador2 = self.jugador2.pop(0)
-        print(f"\n{carta_jugador1} {carta_jugador2}")
+        carta_jugador1 = self.jugador1.sacar_arriba()
+        carta_jugador2 = self.jugador2.sacar_arriba()
 
         puntaje_jugador1 = self.puntaje_carta[carta_jugador1.valor]
         puntaje_jugador2 = self.puntaje_carta[carta_jugador2.valor]
 
+        self.cartas_en_mesa.poner_abajo(carta_jugador1, True)
+        self.cartas_en_mesa.poner_abajo(carta_jugador2, True)
+
+        self.mostrar_turno()
+
         if puntaje_jugador1 > puntaje_jugador2:
             print("¡Jugador 1 gana el turno!")
-            self.jugador1.append(carta_jugador1)
-            self.jugador1.append(carta_jugador2)
+            for i in range(len(self.cartas_en_mesa)):
+                carta = self.cartas_en_mesa.sacar_arriba()
+                self.jugador1.poner_abajo(carta)
         elif puntaje_jugador1 < puntaje_jugador2:
             print("¡Jugador 2 gana el turno!")
-            self.jugador2.append(carta_jugador1)
-            self.jugador2.append(carta_jugador2)
+            for i in range(len(self.cartas_en_mesa)):
+                carta = self.cartas_en_mesa.sacar_arriba()
+                self.jugador2.poner_abajo(carta)
         else:
-            print("Empate")
+            print("------!Guerra¡------\n")
+            self.resolver_guerra()
 
-        self.turno += 1
+    
+    def resolver_guerra(self):
+        # Comprueba que ambos jugadores tienen suficientes cartas para la guerra
+            if len(self.jugador1) < self.cartas_boca_abajo + 1:
+                print("El jugador 1 no tiene suficiente cartas para la guerra, el jugador 2 gana ¡Fin del juego!")
+                return
+            if len(self.jugador2) < self.cartas_boca_abajo + 1:
+                print("El jugador 2 no tiene suficiente cartas para la guerra, el jugador 1 gana ¡Fin del juego!")
+                return
+
+        # Quita las cartas de los mazos de los jugadores
+            for _ in range(self.cartas_boca_abajo):
+                self.cartas_en_mesa.poner_abajo(self.jugador1.sacar_arriba())
+                self.cartas_en_mesa.poner_abajo(self.jugador2.sacar_arriba())
 
     def mostrar_resultado(self):
+        if self.turno > self.max_turnos:
+            print("La partida ha alcanzado el máximo de turnos.")
+            print("¡Empate!")
+            return
         if len(self.jugador1) > len(self.jugador2):
-            print("¡Jugador 1 gana la partida!")
+            print("El jugador 2 no tiene suficiente cartas, el jugador 1 gana la partida ¡Fin del juego!")
         elif len(self.jugador1) < len(self.jugador2):
-            print("¡Jugador 2 gana la partida!")
+            print("¡El jugador 1 no tiene suficiente cartas, el jugador 2 gana la partida ¡Fin del juego!")
         else:
             print("¡Empate!")
 
-seed = 1231
-juego = Juego(seed)
+seed = 111
+juego = Interfaz(seed)
 juego.iniciar_juego()
 while juego.jugador1 and juego.jugador2 and juego.turno <= juego.max_turnos:
     juego.jugar_turno()
 
 juego.mostrar_resultado()
-        

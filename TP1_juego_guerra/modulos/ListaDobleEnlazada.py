@@ -116,6 +116,17 @@ class ListaDoblementeEnlazada():
         nodoRecorrido.asignarAnterior(nuevoNodo) #Actualizamos el enlace del nodo de recorrido para que apunte al nuevo nodo.
         self.tamanio += 1
 
+    def __str__(self) -> str:
+        nodoRecorrido = self.cabeza
+        lista = []
+        while nodoRecorrido != None:
+            lista.append(nodoRecorrido.dato)
+            nodoRecorrido = nodoRecorrido.obtenerSiguiente()
+        return str(lista)
+    
+    def __repr__(self) -> str:
+        return str(self)
+
     def extraer(self, posicion=None):
         nodoRecorrido = self.cabeza
 
@@ -163,16 +174,7 @@ class ListaDoblementeEnlazada():
     def invertir(self): #Invierte el orden de los elementos de la lista.
         na1 = self.cabeza # nodo aux 1
         na2 = self.cola # nodo aux 2
-        """posicionInicial = 0
 
-        while(posicionInicial<self.tamanio and nodoRecorrido != None):
-            nodoAuxiliar = nodoRecorrido.anterior
-            nodoRecorrido.anterior = nodoRecorrido.siguiente
-            nodoRecorrido.siguiente = nodoAuxiliar
-
-            posicionInicial+=1
-            nodoRecorrido=nodoRecorrido.anterior
-    """
         for _ in range(int(self.tamanio/2)):
             aux = na1.dato
             na1.dato = na2.dato

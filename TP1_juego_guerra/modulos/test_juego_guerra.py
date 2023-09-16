@@ -5,7 +5,6 @@ Created on Sun Aug 21 11:23:53 2022
 @author: je_su
 """
 
-
 from juego_guerra import Mazo
 from Carta import Carta
 import unittest
