@@ -26,7 +26,7 @@ class TestMazo(unittest.TestCase):
 
     def test_poner_abajo(self):                     #Poner abajo al momento de ganar el turno
         carta1=Carta('5','trebol')
-        carta2=Carta('3','corazones')
+        carta2=Carta('3','corazones') 
         self.mazo.poner_abajo(carta1)
         self.mazo.poner_abajo(carta2)
         self.assertIs(carta2, self.mazo.mazo.cola.dato)
