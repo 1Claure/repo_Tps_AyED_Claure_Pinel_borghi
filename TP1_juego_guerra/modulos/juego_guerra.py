@@ -110,11 +110,3 @@ class Interfaz:
             print("¡El jugador 1 no tiene suficiente cartas, el jugador 2 gana la partida ¡Fin del juego!")
         else:
             print("¡Empate!")
-
-seed = 42091269
-juego = Interfaz(seed)
-juego.iniciar_juego()
-while juego.jugador1 and juego.jugador2 and juego.turno <= juego.max_turnos:
-    juego.jugar_turno()
-
-juego.mostrar_resultado()

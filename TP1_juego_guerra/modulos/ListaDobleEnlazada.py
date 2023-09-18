@@ -50,9 +50,6 @@ class ListaDoblementeEnlazada():
     def esta_vacia(self): #Devuelve True si la lista está vacía.
         return self.cabeza == None
 
-    #def tamanio(self): #Devuelve el número de ítems de la lista.
-       # return self.tamanio 
-
     def agregar_al_final(self,item): #Agrega un nuevo ítem al final de la lista.
         nodoRecorrido = self.cabeza #Para recorrer los datos
         nuevoNodo = Nodo (item)
@@ -88,10 +85,6 @@ class ListaDoblementeEnlazada():
     #La siguiente función agrega un nuevo ítem a la lista en "posicion"."posicion" es un entero que indica la posición en la lista donde se va a insertar el nuevo elemento. Si la posición no se pasa como argumento, el ítem debe añadirse al final de la lista.
     def insertar(self, item, posicion):
         nuevoNodo = Nodo(item) #Creamos un nuevo objeto de tipo Nodo con el elemento proporcionado y lo almacenamos en la variable nuevoNodo.
-
-        #if nodoRecorrido==None:
-            #self.cabeza=nuevoNodo
-            #posicion=1
 
         if posicion is None or posicion >= self.tamanio: #Aquí verificamos si no se proporciona una posición o si la posición proporcionada está fuera del rango actual de la lista.
             self.agregar_al_final(item)  # Agregar al final si no se especifica la posición o si está fuera de rango
