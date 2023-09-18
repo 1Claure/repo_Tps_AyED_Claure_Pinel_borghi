@@ -3,8 +3,8 @@
 from random import randint
 
 def crear_archivo_de_datos(nombre):
-    f = 10**5
-    N = 5*f
+    f = 10**6
+    N = 5*f # 5 millones de datos
     cifras = 20
     tam_bloque = f # 1 M de valores por bloque a escribir
     
@@ -31,4 +31,31 @@ def crear_archivo_de_datos(nombre):
         with open(nombre, 'a+') as archivo:
             archivo.writelines(bloque)
 
+def ordenar_datos(nombre,b):
+    
+    print('Cantidad de bloques dentro del archivo de texto:', b)
+
+    with open(nombre, 'r') as archivo:
+        bloque = archivo.readlines()
+    
+    contador=0
+    
+    for line in bloque:
+        line.strip()  # Eliminar '\n' 
+        contador+=1
+    
+    bloques_ordenados = []
+
+    with open('ordenado_' + nombre, 'a+') as archivo:
+        for i in range(0,contador,b):
+            nuevoBloque = bloque [i:(i + b)]
+            bloques_ordenados = sorted(nuevoBloque)
+            archivo.writelines(bloques_ordenados)
+
+    print("Archivo ordenado con éxito.")
+
 #crear_archivo_de_datos('datos.txt')
+
+#ordenar_datos('datos.txt',5)
+
+#ordenar_datos('datos.txt',5000000)
