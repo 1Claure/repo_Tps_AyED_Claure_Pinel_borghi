@@ -36,6 +36,6 @@ class Paciente:
         cad += str(self.__riesgo) + '-' + self.__descripcion
         return cad
         
-        
-        
+    def __lt__(self,otro):
+        return self.__riesgo < otro.__riesgo
         
