@@ -1,6 +1,6 @@
 from files import GestorDatos
 from Dijkstra import Dijkstra
-from Maximi import BusquedaMax
+from Maximo_peso import BusquedaMax
 
 def main():
     """
@@ -9,7 +9,7 @@ def main():
     cuello de botella para cada ruta. Los resultados se imprimen en la consola.
     """
     # Crear una instancia de GestorDatos para manejar la lectura del archivo
-    nombre_de_archivo = 'rutas.txt'
+    nombre_de_archivo = 'TP_2\TP2_problema3\rutas.txt'
     gestor_datos = GestorDatos(nombre_de_archivo)
     datos = gestor_datos.leer_archivo()
 
