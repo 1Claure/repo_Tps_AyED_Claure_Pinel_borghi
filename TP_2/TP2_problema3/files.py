@@ -5,7 +5,6 @@ class GestorDatos:
 
         Parametros:
         nombre_archivo (str): El nombre del archivo que contiene los datos de las ciudades.
-
         """
         self.nombre_archivo = nombre_archivo
         self.ciudades = self.leer_archivo()

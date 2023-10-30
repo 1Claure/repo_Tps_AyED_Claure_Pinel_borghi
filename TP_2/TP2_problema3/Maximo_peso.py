@@ -1,77 +1,45 @@
-import heapq
+from monticulo import Monticulo
 
 class BusquedaMax:
-    """
-    Una clase que implementa el algoritmo de Dijkstra para encontrar el camino más corto desde un nodo de origen dado a todos los demás nodos en el grafo.
-    """
-
     def __init__(self, datos):
         """
-        Inicializa una nueva instancia de la clase BusquedaMax.
+        Inicializa la clase BusquedaMax con los datos de entrada.
 
-        Parámetros:
-        - datos: un diccionario que representa el grafo.
+        Args:
+        - datos (dict): Un diccionario que representa los datos de entrada.
         """
         self.datos = datos
-    
-    def dijkstra(self, origen):
-        """
-        Aplica el algoritmo de Dijkstra para encontrar el camino más corto desde un nodo de origen dado a todos los demás nodos en el grafo.
 
-        Parámetros:
-        - origen: el nodo de origen desde el cual comenzar la búsqueda.
-
-        Devuelve:
-        - Un diccionario que contiene el camino más corto desde el nodo de origen a todos los demás nodos en el grafo.
-        """
-        pesos = {ciudad: float('inf') for ciudad in self.datos}
-        pesos[origen] = 0
-        heap = [(0, origen)]
-        visitados = set()
-
-        while heap:
-            (peso, ciudad) = heapq.heappop(heap)
-            if ciudad in visitados:
-                continue
-
-            visitados.add(ciudad)
-
-            for ciudad_vecina, (peso_actual, costo) in self.datos[ciudad].items():
-                nuevo_peso = max(pesos[ciudad], peso_actual)
-                if nuevo_peso < pesos[ciudad_vecina]:
-                    pesos[ciudad_vecina] = nuevo_peso
-                    heapq.heappush(heap, (nuevo_peso, ciudad_vecina))
-
-        return pesos
-        
     def calcular_carga_maxima(self, origen):
         """
-        Calcula la carga máxima que se puede transportar desde un nodo de origen dado a todos los demás nodos en el grafo.
+        Calcula la carga máxima que se puede transportar desde el origen a cada ciudad y su respectivo coste.
 
-        Parámetros:
-        - origen: el nodo de origen desde el cual comenzar la búsqueda.
+        Args:
+        - origen (str): El nombre de la ciudad de origen.
 
-        Devuelve:
-        - Un diccionario que contiene la carga máxima que se puede transportar desde el nodo de origen a todos los demás nodos en el grafo.
+        Returns:
+        - cuello_botella (dict): Un diccionario que representa la carga máxima que se puede transportar desde el origen a cada ciudad.
+        - costo_total (dict): Un diccionario que representa el costo total de transporte desde el origen a cada ciudad.
         """
-        pesos = {}
-        for ciudad in self.datos:
-            pesos[ciudad] = float('inf')
+        cuello_botella = {ciudad: 0 for ciudad in self.datos}
+        costo_total = {ciudad: float('inf') for ciudad in self.datos}
+        camino = {ciudad: [] for ciudad in self.datos}
+        cuello_botella[origen] = float('inf')
+        costo_total[origen] = 0
+        cola = Monticulo()
+        cola.push((-float('inf'), origen))
+        
+        while cola.monticulo:
+            peso, ciudad_actual = cola.pop()
+            peso *= -1
 
-        heap = [(0, origen)]
-        visitados = set()
-
-        while heap:
-            (peso, ciudad) = heapq.heappop(heap)
-            if ciudad in visitados:
-                continue
-
-            visitados.add(ciudad)
-
-            for ciudad_vecina, (peso_actual, costo) in self.datos[ciudad].items():
-                nuevo_peso = min(pesos[ciudad], peso_actual)
-                if nuevo_peso < pesos[ciudad_vecina]:
-                    pesos[ciudad_vecina] = nuevo_peso
-                    heapq.heappush(heap, (-nuevo_peso, ciudad_vecina))
-
-        return pesos
+            for ciudad_destino, (peso_arista, costo_arista) in self.datos[ciudad_actual].items():
+                min_peso = min(peso, peso_arista)
+                nuevo_costo = costo_total[ciudad_actual] + costo_arista
+                if min_peso > cuello_botella[ciudad_destino] or (min_peso == cuello_botella[ciudad_destino] and nuevo_costo < costo_total[ciudad_destino]):
+                    cuello_botella[ciudad_destino] = min_peso
+                    costo_total[ciudad_destino] = nuevo_costo
+                    camino[ciudad_destino] = camino[ciudad_actual] + [ciudad_destino]
+                    cola.push((-min_peso, ciudad_destino))
+        
+        return cuello_botella, costo_total
