@@ -1,5 +1,22 @@
 class Monticulo:
+    """
+    Clase que representa un montículo binario.
 
+    Atributos:
+    - listaMonticulo: lista que almacena los elementos del montículo.
+    - tamanioActual: entero que indica la cantidad de elementos en el montículo.
+
+    Métodos:
+    - __iter__(): devuelve un iterador para recorrer los elementos del montículo. O(1)
+    - __next__(): devuelve el siguiente elemento del iterador. O(1)
+    - agregar(dato): agrega un elemento al montículo y lo acomoda en su posición correspondiente. O(log n)
+    - infiltArriba(i): acomoda el elemento en la posición i hacia arriba en el montículo. O(log n)
+    - infiltAbajo(i): acomoda el elemento en la posición i hacia abajo en el montículo. O(log n)
+    - insertar(k): agrega un elemento al montículo y lo acomoda en su posición correspondiente (mismo método que agregar(dato)). O(log n)
+    - hijoMin(i): devuelve el índice del hijo menor del elemento en la posición i. O(1)
+    - eliminarMin(): elimina el elemento mínimo del montículo y lo devuelve. O(log n)
+    - construirMonticulo(unaLista): construye un montículo a partir de una lista dada. O(n)
+    """
     def __init__(self):
         self.listaMonticulo = [0]
         self.tamanioActual = 0
