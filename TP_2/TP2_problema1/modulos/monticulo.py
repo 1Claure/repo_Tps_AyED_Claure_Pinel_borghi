@@ -84,3 +84,53 @@ class Monticulo:
       while (i > 0):
           self.infiltAbajo(i)
           i = i - 1
+
+"""
+orden de complejidad de cada método de la clase Monticulo:
+
+__init__: Este método inicializa la lista que almacena los elementos del montículo y 
+establece el tamaño actual en cero. Como ambas operaciones son de tiempo constante, la complejidad de este método es O(1).
+
+agregar: Este método agrega un elemento al final de la lista y luego lo mueve hacia arriba
+hasta que se cumple la propiedad del montículo. El peor caso ocurre cuando el elemento agregado 
+es el nuevo mínimo y debe ser movido hasta la raíz del montículo. En este caso, el elemento debe
+ser intercambiado con log(n) elementos en el peor de los casos, donde n es el número de elementos en el montículo. Por lo tanto, la complejidad de este método es O(log n).
+
+eliminar: Este método elimina el elemento mínimo del montículo y lo reemplaza con el último elemento de la lista. 
+Luego, el último elemento se mueve hacia abajo hasta que se cumple la propiedad del montículo.
+El peor caso ocurre cuando el elemento eliminado es la raíz del montículo y debe ser reemplazado 
+por el último elemento de la lista, que luego debe ser movido hacia abajo hasta la hoja más profunda del montículo. 
+En este caso, el elemento debe ser intercambiado con log(n) elementos en el peor de los casos, donde n es el número de elementos en el montículo. 
+Por lo tanto, la complejidad de este método es O(log n).
+
+es_vacio: Este método simplemente verifica si el tamaño actual del montículo es cero. Como esta operación es de tiempo constante,
+la complejidad de este método es O(1).
+
+tamano: Este método devuelve el tamaño actual del montículo. Como esta operación es de tiempo constante, la complejidad
+de este método es O(1).
+
+Espero que esto te ayude a entender mejor la complejidad de cada método de la clase Monticulo.¡Por supuesto! Aquí te explico el orden de complejidad de cada método de la clase Monticulo:
+
+__init__: Este método inicializa la lista que almacena los elementos del montículo y establece el tamaño actual en cero. 
+Como ambas operaciones son de tiempo constante, la complejidad de este método es O(1).
+
+agregar: Este método agrega un elemento al final de la lista y luego lo mueve hacia arriba hasta que se cumple la 
+propiedad del montículo. El peor caso ocurre cuando el elemento agregado es el nuevo mínimo y debe ser movido hasta la raíz del montículo.
+ En este caso, el elemento debe ser intercambiado con log(n) elementos en el peor de los casos, donde n es el número de elementos en el montículo. Por lo tanto, la complejidad de este método es O(log n).
+
+eliminar: Este método elimina el elemento mínimo del montículo y lo reemplaza con el último elemento de la lista.
+Luego, el último elemento se mueve hacia abajo hasta que se cumple la propiedad del montículo.
+El peor caso ocurre cuando el elemento eliminado es la raíz del montículo y debe ser reemplazado por el último
+elemento de la lista, que luego debe ser movido hacia abajo hasta la hoja más profunda del montículo.
+En este caso, el elemento debe ser intercambiado con log(n) elementos
+en el peor de los casos, donde n es el número de elementos en el montículo. Por lo tanto, la complejidad de este método es O(log n).
+
+es_vacio: Este método simplemente verifica si el tamaño actual del montículo es cero. Como esta operación es de tiempo constante,
+ la complejidad de este método es O(1).
+
+tamano: Este método devuelve el tamaño actual del montículo. Como esta operación es de tiempo constante,
+la complejidad de este método es O(1).
+
+Espero que esto te ayude a entender mejor la complejidad de cada método de la clase Monticulo.
+
+"""
