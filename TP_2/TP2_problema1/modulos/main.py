@@ -1,34 +1,30 @@
-# -*- coding: utf-8 -*-
-"""
-Sala de emergencias
-"""
-
 import time
 import datetime
-import modulos.paciente as pac
-import modulos.monticulo as monticulo
+import paciente as pac
+import gestor_de_atencion as gestor
 import random
 
-n = 5  # cantidad de ciclos de simulación
-cola_de_espera = monticulo.Monticulo()
+n = 10  # cantidad de ciclos de simulación
+gestor_de_atencion = gestor.GestorDeAtencion()
 
 # Ciclo que gestiona la simulación
-for i in range(10):
+for i in range(n):
     # Fecha y hora de entrada de un paciente
     ahora = datetime.datetime.now()
     fecha_y_hora = ahora.strftime('%d/%m/%Y %H:%M:%S')
     print('-*-'*15)
     print('\n', fecha_y_hora, '\n')
 
-    # Se crea un paciente un paciente por segundo
+    # Se crea un paciente por segundo
     # La criticidad del paciente es aleatoria
-    paciente = pac.Paciente()
-    cola_de_espera.agregar(paciente)
+    paciente = pac.Paciente(fecha_y_hora)
+    gestor_de_atencion.agregar_paciente(paciente)
 
     # Atención de paciente en este ciclo: en el 50% de los casos
     if random.random() < 0.5:
         # se atiende paciente que se encuentra al frente de la cola
-        paciente_atendido = cola_de_espera.eliminarMin()
+        paciente_atendido = gestor_de_atencion.atender_paciente()
+
         print('*'*10)
         print('Se atiende el paciente:', paciente_atendido)
         print('*'*10)
@@ -38,10 +34,7 @@ for i in range(10):
     print()
 
     # Se muestran los pacientes restantes en la cola de espera
-    print('Pacientes que faltan atenderse:', cola_de_espera.tamanioActual)
-    
-    for paciente in cola_de_espera:
-        print(paciente)
+    gestor_de_atencion.mostrar_pacientes_en_espera()
     
     print()
     print('-*-'*15)

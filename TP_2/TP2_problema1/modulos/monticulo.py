@@ -52,12 +52,13 @@ class Monticulo:
               return i * 2 + 1
 
     def eliminarMin(self):
-      valorSacado = self.listaMonticulo[1]
-      self.listaMonticulo[1] = self.listaMonticulo[self.tamanioActual]
-      self.tamanioActual = self.tamanioActual - 1
-      self.listaMonticulo.pop()
-      self.infiltAbajo(1)
-      return valorSacado
+
+        valorSacado = self.listaMonticulo[1]
+        self.listaMonticulo[1] = self.listaMonticulo[self.tamanioActual]
+        self.tamanioActual = self.tamanioActual - 1
+        self.listaMonticulo.pop()
+        self.infiltAbajo(1)
+        return valorSacado
 
     def construirMonticulo(self,unaLista):
       i = len(unaLista) // 2
