@@ -6,10 +6,10 @@ class TemperaturasDB:
        self.db = AVL_Tree()
 
    def guardar_temperatura(self, temperatura, fecha):
-    self.db.raiz = self.db.insert(self.db.raiz, fecha, temperatura)
+    self.db.raiz = self.db._insert(self.db.raiz, fecha, temperatura)
 
    def devolver_temperatura(self, fecha):
-        return self.db.get(self.db.raiz, fecha)
+        return self.db._get(self.db.raiz, fecha)
 
    def max_temp_rango(self, fecha1, fecha2):
         max_temp = float('-inf')
@@ -48,7 +48,7 @@ class TemperaturasDB:
         self.db.in_order_traversal(self.db.raiz, callback)
 
    def borrar_temperatura(self, fecha):
-       self.db.raiz = self.db.delete(self.db.raiz, fecha)
+       self.db.raiz = self.db._delete(self.db.raiz, fecha)
    
    def devolver_temperaturas(self, fecha1, fecha2):
         temperaturas = []
