@@ -15,10 +15,10 @@ class GestorDeAtencion:
         return self.cola_de_espera.eliminarMin()  # O(log n)
         
     def mostrar_pacientes_en_espera(self):
-        print('Pacientes que faltan atenderse:', self.cola_de_espera.tamanioActual)  # O(1)
+        print('Pacientes que faltan atenderse:', self.cola_de_espera.tamanioActual)
         
         for paciente in self.cola_de_espera:  # O(n)
-            print(paciente)  # O(1)
+            print(paciente) 
     
     def __str__(self):
         return str(self.cola_de_espera)  # O(n)

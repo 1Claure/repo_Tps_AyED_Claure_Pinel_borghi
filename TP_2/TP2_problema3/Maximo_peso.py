@@ -43,3 +43,13 @@ class BusquedaMax:
                     cola.push((-min_peso, ciudad_destino))
         
         return cuello_botella, costo_total
+    
+"""
+COMPLEJIADAD DEL ALGORITMO
+
+La complejidad de tiempo del algoritmo es O((E + V) log V), donde E es el número de aristas y V es el número de vértices
+(ciudades en este caso).
+La razón de esto es que, en el peor de los casos, cada arista y cada vértice se procesan una vez. La operación de extracción de 
+la cola de prioridad (cola.pop()) tiene una complejidad de tiempo de O(log V), ya que es necesario reorganizar el montículo después
+de cada extracción. Por lo tanto, la complejidad total es O((E + V) log V).
+"""

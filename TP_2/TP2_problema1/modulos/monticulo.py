@@ -18,7 +18,7 @@ class Monticulo:
     - construirMonticulo(unaLista): construye un montículo a partir de una lista dada. O(n)
     """
     def __init__(self):
-        self.listaMonticulo = [0]
+        self.listaMonticulo = []
         self.tamanioActual = 0
 
     def __iter__(self):
@@ -94,7 +94,8 @@ establece el tamaño actual en cero. Como ambas operaciones son de tiempo consta
 agregar: Este método agrega un elemento al final de la lista y luego lo mueve hacia arriba
 hasta que se cumple la propiedad del montículo. El peor caso ocurre cuando el elemento agregado 
 es el nuevo mínimo y debe ser movido hasta la raíz del montículo. En este caso, el elemento debe
-ser intercambiado con log(n) elementos en el peor de los casos, donde n es el número de elementos en el montículo. Por lo tanto, la complejidad de este método es O(log n).
+ser intercambiado con log(n) elementos en el peor de los casos, donde n es el número de elementos en el montículo.
+Por lo tanto, la complejidad de este método es O(log n).
 
 eliminar: Este método elimina el elemento mínimo del montículo y lo reemplaza con el último elemento de la lista. 
 Luego, el último elemento se mueve hacia abajo hasta que se cumple la propiedad del montículo.

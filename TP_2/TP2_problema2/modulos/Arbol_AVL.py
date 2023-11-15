@@ -6,6 +6,9 @@ class AVL_Tree:
         self.raiz = None
         self.cantidad = 0
 
+    def insert(self, clave, valor):
+        self.raiz = self._insert(self.raiz, clave, valor)
+
     def _insert(self, raiz, clave, valor):
         if not raiz:
             return TreeNode(clave, valor)
@@ -43,6 +46,9 @@ class AVL_Tree:
             return self.hijo_izqRotate(raiz)
 
         return raiz
+    
+    def delete(self, clave):
+        self.raiz = self._delete(self.raiz, clave)
     
     def _delete(self, raiz, clave):
         if not raiz:
@@ -178,6 +184,9 @@ class AVL_Tree:
         while current.hijo_izq is not None:
             current = current.hijo_izq
         return current
+    
+    def get(self, clave):
+        return self._get(self.raiz, clave)
 
     def _get(self, raiz, clave):
         if raiz is None:
